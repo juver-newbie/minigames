@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Spin the Bottle Game</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+		body
+		{
+			background-color: lightsalmon;
+		}
+		#bottle
+		{
+			height: 200px;
+		}
+		table
+		{
+			position: absolute;
+			top: 0px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 400px;
+			height: 350px;
+		}
+	</style>
+</head>
+<body>
+	<div class="floater-left">
+		<input type="text" id="inp" class="input mb-10" maxlength="5" placeholder="(Max of 5 characters)" autofocus>
+		<button class="btn mb-10" style="border: 1px solid gray;" onclick="addList()">Add</button>
+		<div class="list mb-10" id="list">
+		</div>
+		<input type="hidden" id="count" value="0">
+		<button class="btn" style="border: 1px solid gray;" onclick="clearList()">Clear</button>
+	</div>
+	<center>	
+		<h1>Spin the Bottle</h1>
+		<button class="btn mb-10" id="btn-spin" onclick="rotate()">Spin</button>
+	</center>
+	<div class="container">
+		<table>
+			<tr>
+				<td><p id="slot1">........</p></td>
+				<td><p id="slot2">........</p></td>
+				<td><p id="slot3">........</p></td>
+				<td><p id="slot4">........</p></td>
+				<td><p id="slot5">........</p></td>
+			</tr>
+			<tr>
+				<td><p id="slot6" class="slot">........</p></td>
+				<td><p id="slot7" class="slot"></p></td>
+				<td><p id="slot8" class="slot"></p></td>
+				<td><p id="slot9" class="slot"></p></td>
+				<td><p id="slot10" class="slot">........</p></td>
+			</tr>
+			<tr>
+				<td><p id="slot11" class="slot">........</p></td>
+				<td><p id="slot12" class="slot">........</p></td>
+				<td><p id="slot13" class="slot">........</p></td>
+				<td><p id="slot14" class="slot">........</p></td>
+				<td><p id="slot15" class="slot">........</p></td>
+			</tr>
+		</table>
+		<input type="hidden" id="num" value="0"><br>
+		<img src="img/bottle.png" id="bottle" class="mt-50">
+	</div>
+</body>
+<script>
+	var bottle = document.getElementById('bottle');
+	var rndm = Math.floor(Math.random() * 16) + 5;
+	var speed;
+	function spin()
+	{
+		var num = parseInt(document.getElementById('num').value);
+		var deg = num+30;
+		bottle.style.transform = 'rotate('+deg+'deg)';
+		document.getElementById('num').value = deg;
+		console.log(rndm);
+		var i = 0;
+		setTimeout(function()
+		{
+		    rndm--;
+		    if (rndm != 0) {
+		      spin();
+		    }
+		}, 50)
+	}
+	function random()
+	{
+		rndm = Math.floor(Math.random() * 21) + 20;
+	}
+	function rotate()
+	{
+		if(document.getElementById('count').value == '0' || document.getElementById('count').value == '1')
+		{
+			alert("Add at least 2 options!");
+		}
+		else
+		{
+			random();
+			spin();
+		}
+	}
+	function addList()
+	{
+		var inp = document.getElementById('inp');
+		var count = document.getElementById('count');
+		if(count.value != "15")
+		{
+			document.getElementById('list').innerHTML += '<p>'+inp.value+'</p>';
+			if(count.value == "6")
+			{
+				count.value = parseInt(count.value)+4;
+			}
+			else if(count.value == "7")
+			{
+				count.value = parseInt(count.value)+3;
+			}
+			else if(count.value == "8")
+			{
+				count.value = parseInt(count.value)+2;
+			}
+			else
+			{
+				count.value = parseInt(count.value)+1;
+			}
+			document.getElementById('slot'+count.value).innerHTML = inp.value;
+		}
+		else
+		{
+			alert("Maximum of 12 options only");
+		}
+		inp.value = "";
+		document.getElementById("inp").focus();
+	}
+	function clearList()
+	{
+		document.getElementById('list').replaceChildren();
+		for(var i=1; i<=15; i++)
+		{
+			if(i!=7 || i!=8 || i!=9)
+			{
+				document.getElementById('slot'+i).textContent = "........";
+			}
+		}
+		document.getElementById('count').value = '0';
+		document.getElementById("inp").focus();
+	}
+</script>
+</html>

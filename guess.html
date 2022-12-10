@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Guess the Number Game</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<style>
+			body
+			{
+				background-color: lightblue;
+			}
+			#total, #score
+			{
+				font-size: 30px;
+			}
+			input
+			{
+				width: 200px;
+				height: 30px;
+				text-align: center;
+				margin-bottom: 10px;
+				font-size: 18px;
+				font-weight: bold;
+				border: none;
+			}
+			#res-box
+			{
+				width: 70px;
+				height: 70px;
+				border: 1px solid gray;
+				text-align: center;
+				background-color: white;
+				margin: auto;
+			}
+			#result
+			{
+				color: white;
+			}
+			#message
+			{
+				margin: 0px;
+				padding: 0px;
+				font-size: 20px;
+				font-weight: bold;
+			}
+			#confetti-canvas
+			{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0px;
+				left: 0px;
+				z-index: 1;
+			}
+		</style>
+	</head>
+<body>
+	<div class="container">
+		<h1>Guess the Number</h1>
+		<p>Total Number of Guess:<br><span id="total">0</span></p>
+		<p>Score:<br> <span id="score">0</span></p><br>
+		<i>Guess the number from 0-9</i><br>
+		<input type="text" id="input" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" autofocus><br>
+		<button class="btn mb-10" onclick="guess()">Guess</button><br>
+		<div id="res-box">
+			<h2 id="result"></h2>
+		</div>
+		<p id="message"></p>
+	</div>
+	<canvas id="confetti-canvas"></canvas>
+</body>
+<script type="text/javascript">
+	var clap = new Audio('audio/clap.wav');
+	function guess()
+	{
+		if(document.getElementById('input').value == "")
+		{
+			alert("Please input a number.");
+		}
+		else
+		{
+			var num = parseInt(document.getElementById('input').value);
+			var score = parseInt(document.getElementById('score').textContent);
+			var total = parseInt(document.getElementById('total').textContent);
+			var r = Math.floor(Math.random()*10);
+			var message;
+			if(num == r)
+			{
+				message = '<br>Correct! Guess Again!';
+				document.getElementById('score').innerHTML = score+1;
+				document.getElementById('res-box').style.backgroundColor = "green";
+				startConfetti();
+				clap.play();
+				setTimeout(()=>{removeConfetti();}, 3000);
+				setTimeout(()=>{clap.pause();}, 3000);
+			}
+			else
+			{
+				message = '<br>Wrong! Try Again!';
+				document.getElementById('res-box').style.backgroundColor = "red";
+			}
+			document.getElementById('message').innerHTML = message;
+			document.getElementById('total').innerHTML = total+1;
+			document.getElementById('input').value = "";
+			document.getElementById('result').innerHTML = r;
+		}
+		document.getElementById("input").focus();
+		clap.currentTime = 0;
+	}
+</script>
+<script src="js/confetti.js"></script>
+</html>

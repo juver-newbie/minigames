@@ -1,0 +1,98 @@
+*:focus
+{
+	outline: none;
+}
+.mt-10
+{
+	margin-top: 10px;
+}
+.mt-20
+{
+	margin-top: 20px;
+}
+.mt-30
+{
+	margin-top: 30px;
+}
+.mt-40
+{
+	margin-top: 40px;
+}
+.mt-50
+{
+	margin-top: 50px;
+}
+.mb-10
+{
+	margin-bottom: 10px;
+}
+.mb-20
+{
+	margin-bottom: 20px;
+}
+.mb-30
+{
+	margin-bottom: 30px;
+}
+.mb-40
+{
+	margin-bottom: 40px;
+}
+.mb-50
+{
+	margin-bottom: 50px;
+}
+.container
+{
+	margin-top: 50px;
+	position: absolute;
+	z-index: 2;
+	text-align: center;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+}
+.btn
+{
+	height: 30px;
+	cursor: pointer;
+	background-color: white;
+	border: none;
+	padding: 5px 20px;
+	border-radius: 5px;
+}
+.btn:hover
+{
+	background-color: #0b56a3;
+	color: white;
+	transition: 0.5s;
+	font-weight: bold;
+}
+.floater-left
+{
+	position: absolute;
+	top: 50px;
+	left: 20px;
+	width: 300px;
+	height: 500px;
+	border: 1px solid gray;
+	background-color: white;
+	padding: 10px;
+	z-index: 3;
+}
+.input
+{
+	height: 30px;
+	width: 92%;
+	padding: 0px 10px;
+}
+.list
+{
+	border: 1px dotted gray;
+	height: 350px;
+	padding: 10px;
+}
+p
+{
+	margin: 0px;
+}
